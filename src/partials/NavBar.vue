@@ -93,6 +93,7 @@ const onSubmit = () => {
         router.push('/')
 
         visible.value = false
+        isSigningUp.value = false
 
         credentials.email = ''
         credentials.password = ''
@@ -308,7 +309,12 @@ const onSubmit = () => {
           <div class="flex items-center gap-4">
             <Button
               label="Cancel"
-              @click="closeCallback"
+              @click="
+                () => {
+                  closeCallback()
+                  isSignUp.value = false
+                }
+              "
               text
               class="!p-3 w-full !text-white !border !border-white/30 hover:!bg-white/10"
             ></Button>
