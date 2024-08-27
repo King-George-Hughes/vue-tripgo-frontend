@@ -16,6 +16,7 @@
     "@tanstack/vue-query-devtools": "^5.52.2",
     "axios": "^1.7.5",
     "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^4.0.0-alpha.4",
     "preline": "^2.4.1",
     "primeicons": "^7.0.0",
     "primevue": "^4.0.5",

@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import TandC from './../views/TandC.vue'
 import NotFound from '../views/NotFound.vue'
 import Dashboard from '../views/admin/Dashboard.vue'
-import LoginView from '@/views/LoginView.vue'
 import HomeView from '@/views/HomeView.vue'
 import TripsView from '@/views/TripsView.vue'
 
@@ -18,11 +17,6 @@ const router = createRouter({
       name: 'trips',
       path: '/trips',
       component: TripsView
-    },
-    {
-      name: 'login',
-      path: '/login',
-      component: LoginView
     },
     {
       name: 'terms-and-conditions',

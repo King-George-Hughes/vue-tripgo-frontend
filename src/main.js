@@ -1,9 +1,12 @@
 import './assets/main.css'
 import 'primeicons/primeicons.css'
 import 'preline/preline'
+import 'vue-toastification/dist/index.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import Toast from 'vue-toastification'
 
 import App from './App.vue'
 import router from './router'
@@ -15,8 +18,13 @@ import Aura from '@primevue/themes/aura'
 
 const app = createApp(App)
 
-app.use(createPinia())
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+
+app.use(pinia)
 app.use(router)
+
+app.use(Toast)
 
 app.use(VueQueryPlugin, {
   enableDevtoolsV6Plugin: true

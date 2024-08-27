@@ -1,10 +1,7 @@
 import axiosClient from '@/api/axiosClient'
-import { useUserStore } from '@/stores/user'
 import { useMutation } from '@tanstack/vue-query'
 
 const useSignup = () => {
-  const userStore = useUserStore()
-
   return useMutation({
     mutationFn: async (credentials) =>
       await axiosClient
@@ -16,10 +13,7 @@ const useSignup = () => {
           console.log(error)
         }),
 
-    onSuccess: (data) => {
-      userStore.setToken(data.token)
-      userStore.setUser(data.user)
-    }
+    onSuccess: () => {}
   })
 }
 
