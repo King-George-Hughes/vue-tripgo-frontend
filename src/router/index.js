@@ -4,6 +4,12 @@ import NotFound from '../views/NotFound.vue'
 import Dashboard from '../views/admin/Dashboard.vue'
 import HomeView from '@/views/HomeView.vue'
 import TripsView from '@/views/TripsView.vue'
+import { useUserStore } from '@/stores/user'
+
+const isAuthenticated = () => {
+  const userStore = useUserStore()
+  return !!userStore.token
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,7 +33,8 @@ const router = createRouter({
     {
       name: 'dashboard',
       path: '/dashboard',
-      component: Dashboard
+      component: Dashboard,
+      meta: { requiresAuth: true }
     },
     {
       name: 'not-found',
@@ -35,6 +42,14 @@ const router = createRouter({
       component: NotFound
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !isAuthenticated()) {
+    next({ name: 'home' })
+  } else {
+    next()
+  }
 })
 
 router.afterEach((to, from, failure) => {
