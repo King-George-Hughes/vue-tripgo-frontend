@@ -22,8 +22,6 @@ const form = reactive({
 })
 
 const onSubmit = () => {
-  console.log(form)
-
   if (
     form.firstName === '' ||
     form.lastName === '' ||
@@ -56,7 +54,7 @@ const onSubmit = () => {
 <template>
   <div>
     <div class="card flex justify-center">
-      <Button label="Add Location" @click="showDriverform = true" severity="success" />
+      <Button label="Add Driver" @click="showDriverform = true" severity="success" />
 
       <Dialog
         v-model:visible="showDriverform"

@@ -8,31 +8,39 @@ const breadCrumb = ref(0)
 const links = [
   {
     name: 'Dashboard',
-    url: '/dashboard'
+    url: '/dashboard',
+    icon: 'pi-cog'
   },
   {
     name: 'Bookings',
-    url: '/bookings'
+    url: '/bookings',
+    icon: 'pi-book'
   },
-  {
-    name: 'Users',
-    url: '/users'
-  },
+
   {
     name: 'Locations',
-    url: '/locations'
+    url: '/locations',
+    icon: 'pi-map-marker'
   },
   {
     name: 'Buses',
-    url: '/buses'
+    url: '/buses',
+    icon: 'pi-car'
   },
   {
     name: 'Drivers',
-    url: '/drivers'
+    url: '/drivers',
+    icon: 'pi-user'
+  },
+  {
+    name: 'Users',
+    url: '/users',
+    icon: 'pi-users'
   },
   {
     name: 'Schedules',
-    url: '/schedules'
+    url: '/schedules',
+    icon: 'pi-calendar'
   }
 ]
 
@@ -81,21 +89,7 @@ const toggleBreadcrumb = (index) => {
                 :class="`${isActiveLink(link.url) ? 'flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white' : 'w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300'} `"
                 :to="link.url"
               >
-                <svg
-                  class="shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <polyline points="9 22 9 12 15 12 15 22" />
-                </svg>
+                <span :class="'pi ' + link.icon"></span>
                 {{ link.name }}
               </RouterLink>
             </li>

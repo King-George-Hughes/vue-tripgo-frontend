@@ -12,12 +12,12 @@
             >
               <div>
                 <h2 class="text-xl lg:text-2xl font-semibold text-gray-800 dark:text-neutral-200">
-                  Manage Drivers
+                  Manage Buses
                 </h2>
               </div>
 
               <div>
-                <DriverForm />
+                <busForm />
               </div>
             </div>
             <!-- End Header -->
@@ -43,7 +43,7 @@
                     <span
                       class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
                     >
-                      Name
+                      Model
                     </span>
                   </th>
 
@@ -51,7 +51,7 @@
                     <span
                       class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
                     >
-                      Gender
+                      Plate Number
                     </span>
                   </th>
 
@@ -59,7 +59,15 @@
                     <span
                       class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
                     >
-                      Phone Number
+                      Seat Capacity
+                    </span>
+                  </th>
+
+                  <th scope="col" class="px-6 py-3 text-start">
+                    <span
+                      class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
+                    >
+                      Status
                     </span>
                   </th>
 
@@ -82,7 +90,7 @@
               </thead>
 
               <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                <tr v-for="(driver, index) in drivers" :key="driver.id">
+                <tr v-for="(bus, index) in buses" :key="bus.id">
                   <td class="h-px w-auto whitespace-nowrap">
                     <div class="px-6 py-2 flex items-center gap-x-3">
                       <span>{{ index + 1 }}</span>
@@ -90,25 +98,30 @@
                   </td>
                   <td class="h-px w-auto whitespace-nowrap">
                     <div class="px-6 py-2 flex items-center gap-x-3">
-                      <span>{{ driver.firstName }} {{ driver.lastName }}</span>
+                      <span>{{ bus.model }} </span>
                     </div>
                   </td>
                   <td class="h-px w-auto whitespace-nowrap">
                     <div class="px-6 py-2">
                       <span class="text-sm text-gray-600 dark:text-neutral-200">{{
-                        driver.gender
+                        bus.plateNumber
                       }}</span>
                     </div>
                   </td>
                   <td class="h-px w-auto whitespace-nowrap">
                     <div class="px-6 py-2">
-                      <span class="text-sm text-gray-600">{{ driver.phoneNumber }}</span>
+                      <span class="text-sm text-gray-600">{{ bus.seatCapacity }}</span>
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-6 py-2">
+                      <span class="text-sm text-gray-600">{{ bus.status }}</span>
                     </div>
                   </td>
                   <td class="h-px w-auto whitespace-nowrap">
                     <div class="px-6 py-2">
                       <span class="text-sm text-gray-600">{{
-                        formatDateTime(driver.dateCreated)
+                        formatDateTime(bus.dateCreated)
                       }}</span>
                     </div>
                   </td>
@@ -134,11 +147,11 @@
 </template>
 
 <script setup>
-import DriverForm from '@/features/driver/DriverForm.vue'
+import BusForm from '@/features/bus/BusForm.vue'
 import { formatDateTime } from '@/util/helper'
 
 defineProps({
-  drivers: []
+  buses: []
 })
 </script>
 
