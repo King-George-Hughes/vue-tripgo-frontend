@@ -58,7 +58,7 @@ const toggleBreadcrumb = (index) => {
         <!-- Logo -->
         <RouterLink
           class="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
-          href="#"
+          to="/dashboard"
           aria-label="Preline"
         >
           LOGO

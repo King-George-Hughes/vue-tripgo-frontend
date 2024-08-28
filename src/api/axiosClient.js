@@ -1,18 +1,23 @@
 import axios from 'axios'
-// import { useUserStore } from '@/stores/user'
 
 const axiosClient = axios.create({
   baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`
 })
 
+// // Request interceptor
 // axiosClient.interceptors.request.use((config) => {
-//   // const useStore = useUserStore()
-//   const token = useUserStore().token
-//   config.headers.Authorization = `Bearer ${token}`
+//   const userStore = useUserStore()
+//   const token = userStore.token
+
+//   // Add token only if it exists
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`
+//   }
 
 //   return config
 // })
 
+// // Response interceptor
 // axiosClient.interceptors.response.use(
 //   (response) => {
 //     return response
@@ -20,8 +25,8 @@ const axiosClient = axios.create({
 //   (error) => {
 //     const { response } = error
 
-//     if (response.status === 401) {
-//       useUserStore.setToken('')
+//     if (response && response.status === 401) {
+//       useUserStore().setToken('')
 //     }
 
 //     throw error
@@ -29,6 +34,8 @@ const axiosClient = axios.create({
 // )
 
 export default axiosClient
+
+////////////////////////////////////////////////////////////
 
 // import axios from 'axios'
 
