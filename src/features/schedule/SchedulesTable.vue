@@ -12,18 +12,18 @@
             >
               <div>
                 <h2 class="text-xl lg:text-2xl font-semibold text-gray-800 dark:text-neutral-200">
-                  Manage Drivers
+                  Manage Schedules
                 </h2>
               </div>
 
               <div>
-                <DriverForm />
+                <ScheduleForm />
               </div>
             </div>
             <!-- End Header -->
 
             <!-- Table -->
-            <table class="w-full divide-y divide-gray-200 dark:divide-neutral-700">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
               <thead
                 class="bg-gray-50 divide-y divide-gray-200 dark:bg-neutral-800 dark:divide-neutral-700"
               >
@@ -35,7 +35,7 @@
                     <span
                       class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
                     >
-                      #
+                      Company / Bus
                     </span>
                   </th>
 
@@ -43,7 +43,7 @@
                     <span
                       class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
                     >
-                      Name
+                      Journy
                     </span>
                   </th>
 
@@ -51,7 +51,7 @@
                     <span
                       class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
                     >
-                      Gender
+                      schedule Status
                     </span>
                   </th>
 
@@ -59,7 +59,7 @@
                     <span
                       class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
                     >
-                      Phone Number
+                      Schedule
                     </span>
                   </th>
 
@@ -67,7 +67,7 @@
                     <span
                       class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
                     >
-                      Created At
+                      Price
                     </span>
                   </th>
 
@@ -75,44 +75,63 @@
                     <span
                       class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
                     >
-                      Action
+                      Actions
                     </span>
                   </th>
                 </tr>
               </thead>
 
               <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                <tr v-for="(driver, index) in drivers" :key="driver.id">
+                <tr v-for="schedule in schedules" :key="schedule.id">
                   <td class="h-px w-auto whitespace-nowrap">
                     <div class="px-6 py-2 flex items-center gap-x-3">
-                      <span>{{ index + 1 }}</span>
-                    </div>
-                  </td>
-                  <td class="h-px w-auto whitespace-nowrap">
-                    <div class="px-6 py-2 flex items-center gap-x-3">
-                      <span>{{ driver.firstName }} {{ driver.lastName }}</span>
+                      <div class="flex items-start flex-col gap-x-2" href="#">
+                        <p class="capitalize">
+                          <span class="font-semibold">Model: </span>{{ schedule.bus.model }}
+                        </p>
+                        <p>
+                          <span class="font-semibold">Plate: </span>{{ schedule.bus.plateNumber }}
+                        </p>
+                        <p>
+                          <span class="font-semibold">Capacity: </span
+                          >{{ schedule.bus.seatCapacity }}
+                        </p>
+                      </div>
                     </div>
                   </td>
                   <td class="h-px w-auto whitespace-nowrap">
                     <div class="px-6 py-2">
-                      <span class="text-sm text-gray-600 dark:text-neutral-200">{{
-                        driver.gender
+                      <span class="text-sm text-gray-600 dark:text-neutral-200"
+                        >{{ schedule.origin.name }} ({{ schedule.origin.station }}) -
+                        {{ schedule.destination.name }} ({{ schedule.destination.station }})</span
+                      >
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-6 py-2">
+                      <span class="text-sm text-gray-600">{{ schedule.bus.status }}</span>
+                    </div>
+                  </td>
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-6 py-2 flex flex-col items-start gap-2">
+                      <span class="text-sm text-gray-800 dark:text-neutral-200"
+                        >{{ formatDayOfWeek(schedule.departureTime) }}
+                      </span>
+                      <span class="text-sm text-gray-800 dark:text-neutral-200">{{
+                        formatDate(schedule.departureTime)
                       }}</span>
+                      <span class="text-sm rounded-sm bg-primary_color/80 text-white px-4 py-1"
+                        >{{ formatTime(schedule.departureTime) }} <br />
+                        {{ formatTime(schedule.arrivalTime) }}
+                      </span>
                     </div>
                   </td>
                   <td class="h-px w-auto whitespace-nowrap">
                     <div class="px-6 py-2">
-                      <span class="text-sm text-gray-600">{{ driver.phoneNumber }}</span>
+                      <span class="text-sm text-gray-800 dark:text-neutral-200">$ 180.00</span>
                     </div>
                   </td>
                   <td class="h-px w-auto whitespace-nowrap">
-                    <div class="px-6 py-2">
-                      <span class="text-sm text-gray-600">{{
-                        formatDateTime(driver.dateCreated)
-                      }}</span>
-                    </div>
-                  </td>
-                  <td class="h-px w-auto">
                     <div class="px-6 py-2 inline-flex items-center gap-3">
                       <button class="text-yellow-500 hover:text-yellow-600">
                         <i class="pi pi-pen-to-square"></i>
@@ -134,11 +153,13 @@
 </template>
 
 <script setup>
-import DriverForm from '@/features/driver/DriverForm.vue'
-import { formatDateTime } from '@/util/helper'
+import ScheduleForm from '@/features/schedule/ScheduleForm.vue'
+import { formatDate } from '@/util/helper.js'
+import { formatTime } from '@/util/helper.js'
+import { formatDayOfWeek } from '@/util/helper.js'
 
 defineProps({
-  drivers: []
+  schedules: []
 })
 </script>
 
