@@ -1,3 +1,31 @@
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import Select from 'primevue/select'
+import DatePicker from 'primevue/datepicker'
+import useLocations from '@/hooks/locations/useLocations'
+
+const router = useRouter()
+const { data: locationsData } = useLocations()
+
+const selectedCityFrom = ref()
+const selectedCityTo = ref()
+const locations = ref(locationsData)
+
+const buttondisplay = ref()
+
+const onSubmit = () => {
+  router.push({
+    name: 'trips',
+    query: {
+      departureDate: buttondisplay.value.toISOString().split('T')[0],
+      origin: selectedCityFrom.value?.name,
+      destination: selectedCityTo.value?.name
+    }
+  })
+}
+</script>
+
 <template>
   <div class="flex flex-col md:flex-row items-center justify-center gap-5">
     <!-- From Location -->
@@ -77,39 +105,3 @@
     </button>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import Select from 'primevue/select'
-import DatePicker from 'primevue/datepicker'
-import useSearchSchedule from '@/hooks/schedules/useSearchSchedule'
-import useLocations from '@/hooks/locations/useLocations'
-import { useTripsStore } from '@/stores/trips'
-
-const router = useRouter()
-const { mutate: searchSchedule, isPending } = useSearchSchedule()
-const { data: locationsData } = useLocations()
-const tripsStore = useTripsStore()
-
-const selectedCityFrom = ref()
-const selectedCityTo = ref()
-const locations = ref(locationsData)
-
-const buttondisplay = ref()
-
-const onSubmit = () => {
-  const schedule = {
-    departureDate: buttondisplay.value.toISOString().split('T')[0],
-    origin: selectedCityFrom.value?.name,
-    destination: selectedCityTo.value?.name
-  }
-
-  searchSchedule(schedule, {
-    onSuccess: (data) => {
-      tripsStore.populateTrips(data)
-      router.push('/trips')
-    }
-  })
-}
-</script>
