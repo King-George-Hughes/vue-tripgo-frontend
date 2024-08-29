@@ -1,10 +1,10 @@
 <script setup>
 import BusesTable from '@/features/bus/BusesTable.vue'
 
-import usebuses from '@/hooks/buses/usebuses'
+import useBuses from '@/hooks/buses/usebuses'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
-const { data: buses, isLoading } = usebuses()
+const { data: buses, isLoading } = useBuses()
 </script>
 
 <template>

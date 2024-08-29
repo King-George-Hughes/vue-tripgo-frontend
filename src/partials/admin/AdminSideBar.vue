@@ -16,11 +16,10 @@ const links = [
     url: '/bookings',
     icon: 'pi-book'
   },
-
   {
-    name: 'Locations',
-    url: '/locations',
-    icon: 'pi-map-marker'
+    name: 'Drivers',
+    url: '/drivers',
+    icon: 'pi-user'
   },
   {
     name: 'Buses',
@@ -28,9 +27,9 @@ const links = [
     icon: 'pi-car'
   },
   {
-    name: 'Drivers',
-    url: '/drivers',
-    icon: 'pi-user'
+    name: 'Locations',
+    url: '/locations',
+    icon: 'pi-map-marker'
   },
   {
     name: 'Users',

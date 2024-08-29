@@ -53,16 +53,6 @@ const onSubmit = () => {
           <span class="text-surface-500 dark:text-surface-400 block mb-8"
             >Fill the details below.</span
           >
-          <div class="flex items-center gap-4 mb-4">
-            <label for="plateNumber" class="font-semibold w-24">Plate Number</label>
-            <InputText
-              id="plateNumber"
-              v-model="form.plateNumber"
-              name="plateNumber"
-              class="flex-auto"
-              autocomplete="off"
-            />
-          </div>
 
           <div class="flex items-center gap-4 mb-4">
             <label for="model" class="font-semibold w-24">Model</label>
@@ -70,6 +60,17 @@ const onSubmit = () => {
               id="model"
               v-model="form.model"
               name="model"
+              class="flex-auto"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="flex items-center gap-4 mb-4">
+            <label for="plateNumber" class="font-semibold w-24">Number Plate</label>
+            <InputText
+              id="plateNumber"
+              v-model="form.plateNumber"
+              name="plateNumber"
               class="flex-auto"
               autocomplete="off"
             />
