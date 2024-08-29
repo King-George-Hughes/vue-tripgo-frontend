@@ -17,6 +17,11 @@ const links = [
     icon: 'pi-book'
   },
   {
+    name: 'Schedules',
+    url: '/schedules',
+    icon: 'pi-calendar'
+  },
+  {
     name: 'Drivers',
     url: '/drivers',
     icon: 'pi-user'
@@ -35,11 +40,6 @@ const links = [
     name: 'Users',
     url: '/users',
     icon: 'pi-users'
-  },
-  {
-    name: 'Schedules',
-    url: '/schedules',
-    icon: 'pi-calendar'
   }
 ]
 

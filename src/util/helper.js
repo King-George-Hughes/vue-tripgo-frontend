@@ -38,20 +38,16 @@ export const formatDayOfWeek = (dateString) => {
 export const getRecurrenceInterval = (departureTime, arrivalTime) => {
   if (!departureTime || !arrivalTime) return ''
 
-  // Ensure the input is a valid date
   const departure = new Date(departureTime)
   const arrival = new Date(arrivalTime)
 
-  // Check if the date parsing failed
   if (isNaN(departure.getTime()) || isNaN(arrival.getTime())) {
     console.error('Invalid date format.')
     return ''
   }
 
-  // Calculate the time difference in milliseconds
   const timeDifference = arrival - departure
 
-  // If the difference is negative, return an empty string or handle as needed
   if (timeDifference < 0) {
     console.error('Arrival time is before departure time.')
     return ''
@@ -61,7 +57,6 @@ export const getRecurrenceInterval = (departureTime, arrivalTime) => {
   const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
   const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60))
 
-  // Construct the ISO 8601 duration string
   let duration = 'PT'
 
   if (days > 0) {

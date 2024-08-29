@@ -1,10 +1,10 @@
 <script setup>
 import LocationsTable from '@/features/location/LocationsTable.vue'
-
-import useLocations from '@/hooks/locations/useLocations'
+import useLocationsWithParams from '@/hooks/locations/useLocationsWithParams'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import PaginationComponent from '@/components/PaginationComponent.vue'
 
-const { data: locations, isLoading } = useLocations()
+const { data: locations, isLoading } = useLocationsWithParams()
 </script>
 
 <template>
@@ -14,7 +14,9 @@ const { data: locations, isLoading } = useLocations()
     </div>
 
     <div v-else>
-      <LocationsTable :locations="locations" />
+      <LocationsTable :locations="locations.data" />
+
+      <PaginationComponent urlRoute="locations" :totalPages="locations.totalPages || 1" />
     </div>
   </div>
 </template>

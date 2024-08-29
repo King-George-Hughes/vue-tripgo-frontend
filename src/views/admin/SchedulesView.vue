@@ -16,7 +16,7 @@ const { data: schedules, isLoading } = useSchedules()
     <div v-else>
       <SchedulesTable :schedules="schedules.data" />
 
-      <PaginationComponent :totalPages="schedules.totalPages || 1" />
+      <PaginationComponent urlRoute="schedules" :totalPages="schedules.totalPages || 1" />
     </div>
   </div>
 </template>

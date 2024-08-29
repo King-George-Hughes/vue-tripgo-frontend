@@ -18,6 +18,10 @@ const router = useRouter()
 const route = useRoute()
 
 const props = defineProps({
+  urlRoute: {
+    type: String,
+    required: true
+  },
   totalPages: {
     type: Number,
     required: true
@@ -32,7 +36,7 @@ const goToPage = (page) => {
   if (page < 0 || page >= props.totalPages) return
 
   router.push({
-    name: 'schedules',
+    name: props.urlRoute,
     query: {
       page: page
     }
