@@ -1,5 +1,6 @@
 <script setup>
-import BusesTable from '@/features/bus/BusesTable.vue'
+// import BusesTable from '@/features/bus/BusesTable.vue'
+import BusesTable from '../../features/bus/BusesTable.vue'
 import useBuses from '@/hooks/buses/useBuses'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
