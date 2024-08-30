@@ -17,10 +17,6 @@ const links = [
     url: '/'
   },
   {
-    name: 'Trips',
-    url: '/trips'
-  },
-  {
     name: 'Terms and Conditions',
     url: '/terms-and-conditions'
   }

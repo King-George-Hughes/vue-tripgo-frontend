@@ -3,9 +3,11 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Select from 'primevue/select'
 import DatePicker from 'primevue/datepicker'
+import { useToast } from 'vue-toastification'
 import useLocations from '@/hooks/locations/useLocations'
 
 const router = useRouter()
+const toast = useToast()
 const { data: locationsData } = useLocations()
 
 const selectedCityFrom = ref()
@@ -15,6 +17,11 @@ const locations = ref(locationsData)
 const buttondisplay = ref()
 
 const onSubmit = () => {
+  if (!selectedCityFrom.value || !selectedCityTo.value || locations.value) {
+    toast.error('All fields are required!')
+    return null
+  }
+
   router.push({
     name: 'trips',
     query: {
