@@ -14,10 +14,10 @@ const selectedCityFrom = ref()
 const selectedCityTo = ref()
 const locations = ref(locationsData)
 
-const buttondisplay = ref()
+const selectedDate = ref()
 
 const onSubmit = () => {
-  if (!selectedCityFrom.value || !selectedCityTo.value || locations.value) {
+  if (!selectedCityFrom.value || !selectedCityTo.value) {
     toast.error('All fields are required!')
     return null
   }
@@ -25,7 +25,7 @@ const onSubmit = () => {
   router.push({
     name: 'trips',
     query: {
-      departureDate: buttondisplay.value.toISOString().split('T')[0],
+      departureDate: selectedDate.value.toISOString().split('T')[0],
       origin: selectedCityFrom.value?.name,
       destination: selectedCityTo.value?.name
     }
@@ -84,7 +84,7 @@ const onSubmit = () => {
     </Select>
 
     <!-- Date Picker -->
-    <DatePicker v-model="buttondisplay" dateFormat="dd/mm/yy" showIcon fluid iconDisplay="input" />
+    <DatePicker v-model="selectedDate" dateFormat="dd/mm/yy" showIcon fluid iconDisplay="input" />
 
     <!-- Search Button -->
     <button

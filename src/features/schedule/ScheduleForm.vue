@@ -64,8 +64,8 @@ const onSubmit = () => {
   form.price = Number(form.price)
 
   // Convert the dates to ISO format
-  form.departureTime = new Date(form.departureTime).toISOString()
-  form.arrivalTime = new Date(form.arrivalTime).toISOString()
+  // form.departureTime = new Date(form.departureTime).toISOString()
+  // form.arrivalTime = new Date(form.arrivalTime).toISOString()
 
   console.log(form)
 
