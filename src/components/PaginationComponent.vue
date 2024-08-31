@@ -1,5 +1,8 @@
 <template>
-  <div class="w-full p-5 mt-5 flex items-center justify-between max-w-6xl">
+  <div
+    v-if="props.totalPages > 1"
+    class="w-full p-5 mt-5 flex items-center justify-between max-w-6xl"
+  >
     <div class="hidden lg:block">
       <small
         >Showing <span class="font-bold">{{ currentPage + 1 }}</span> out of

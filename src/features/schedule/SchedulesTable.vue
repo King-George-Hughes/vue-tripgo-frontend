@@ -103,12 +103,12 @@
                         {{ schedule.origin.name }} ({{ schedule.origin.station }})
                       </span>
 
-                      <span class="text-gray-800">
+                      <span class="text-gray-800 text-sm">
                         <Tag value="To:" severity="info" style="width: 50px; padding: 2px"></Tag>
                         {{ schedule.destination.name }} ({{ schedule.destination.station }})</span
                       >
 
-                      <span class="text-gray-800">
+                      <span class="text-gray-800 text-sm">
                         <Tag value="Cap:" severity="warn" style="width: 50px; padding: 2px"></Tag>
                         {{ schedule.bus.seatCapacity }}</span
                       >
@@ -138,7 +138,9 @@
                   </td>
                   <td class="h-px w-auto whitespace-nowrap">
                     <div class="px-6 py-2">
-                      <span class="text-sm text-gray-800 dark:text-neutral-200">$ 180.00</span>
+                      <span class="text-sm text-gray-800 dark:text-neutral-200"
+                        >${{ schedule.fare }}</span
+                      >
                     </div>
                   </td>
                   <td class="h-px w-auto whitespace-nowrap">
