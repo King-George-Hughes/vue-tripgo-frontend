@@ -15,11 +15,11 @@ const links = [
   {
     name: 'Home',
     url: '/'
-  },
-  {
-    name: 'Terms and Conditions',
-    url: '/terms-and-conditions'
   }
+  // {
+  //   name: 'Terms and Conditions',
+  //   url: '/terms-and-conditions'
+  // }
 ]
 
 const authLinks = [

@@ -51,7 +51,7 @@
                     <span
                       class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
                     >
-                      schedule Status
+                      Schedule
                     </span>
                   </th>
 
@@ -59,7 +59,7 @@
                     <span
                       class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
                     >
-                      Schedule
+                      Status
                     </span>
                   </th>
 
@@ -85,44 +85,54 @@
                 <tr v-for="schedule in schedules" :key="schedule.id">
                   <td class="h-px w-auto whitespace-nowrap">
                     <div class="px-6 py-2 flex items-center gap-x-3">
-                      <div class="flex items-start flex-col gap-x-2" href="#">
-                        <p class="capitalize">
-                          <span class="font-semibold">Model: </span>{{ schedule.bus.model }}
+                      <div class="flex items-start flex-col gap-2" href="#">
+                        <p class="capitalize font-semibold pl-1">
+                          {{ schedule.bus.model }}
                         </p>
                         <p>
-                          <span class="font-semibold">Plate: </span>{{ schedule.bus.plateNumber }}
+                          <Tag severity="secondary" :value="schedule.bus.plateNumber"></Tag>
                         </p>
-                        <p>
-                          <span class="font-semibold">Capacity: </span
-                          >{{ schedule.bus.seatCapacity }}
-                        </p>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-6 py-2 flex items-start gap-2 flex-col">
+                      <span class="text-gray-800 text-sm"
+                        ><Tag value="From:" severity="info" style="width: 50px; padding: 2px"></Tag>
+                        {{ schedule.origin.name }} ({{ schedule.origin.station }})
+                      </span>
+
+                      <span class="text-gray-800">
+                        <Tag value="To:" severity="info" style="width: 50px; padding: 2px"></Tag>
+                        {{ schedule.destination.name }} ({{ schedule.destination.station }})</span
+                      >
+
+                      <span class="text-gray-800">
+                        <Tag value="Cap:" severity="warn" style="width: 50px; padding: 2px"></Tag>
+                        {{ schedule.bus.seatCapacity }}</span
+                      >
+                    </div>
+                  </td>
+
+                  <td class="h-px w-auto whitespace-nowrap">
+                    <div class="px-6 py-2 flex flex-col items-start gap-2">
+                      <div class="text-sm text-gray-800 dark:text-neutral-200">
+                        {{ formatDayOfWeek(schedule.departureTime) }} -
+                        <span class="font-semibold">{{ formatDate(schedule.departureTime) }}</span>
+                      </div>
+
+                      <div class="text-sm py-1">
+                        <Tag severity="secondary" :value="formatTime(schedule.departureTime)"></Tag>
+                        -
+                        <Tag severity="secondary" :value="formatTime(schedule.arrivalTime)"></Tag>
                       </div>
                     </div>
                   </td>
                   <td class="h-px w-auto whitespace-nowrap">
                     <div class="px-6 py-2">
-                      <span class="text-sm text-gray-600 dark:text-neutral-200"
-                        >{{ schedule.origin.name }} ({{ schedule.origin.station }}) -
-                        {{ schedule.destination.name }} ({{ schedule.destination.station }})</span
-                      >
-                    </div>
-                  </td>
-                  <td class="h-px w-auto whitespace-nowrap">
-                    <div class="px-6 py-2">
-                      <span class="text-sm text-gray-600">{{ schedule.bus.status }}</span>
-                    </div>
-                  </td>
-                  <td class="h-px w-auto whitespace-nowrap">
-                    <div class="px-6 py-2 flex flex-col items-start gap-2">
-                      <span class="text-sm text-gray-800 dark:text-neutral-200"
-                        >{{ formatDayOfWeek(schedule.departureTime) }}
-                      </span>
-                      <span class="text-sm text-gray-800 dark:text-neutral-200">{{
-                        formatDate(schedule.departureTime)
-                      }}</span>
-                      <span class="text-sm rounded-sm bg-primary_color/80 text-white px-4 py-1"
-                        >{{ formatTime(schedule.departureTime) }} <br />
-                        {{ formatTime(schedule.arrivalTime) }}
+                      <span class="text-sm text-gray-600 lowercase">
+                        <Tag severity="success" :value="schedule.bus.status"></Tag>
                       </span>
                     </div>
                   </td>
@@ -157,6 +167,7 @@ import ScheduleForm from '@/features/schedule/ScheduleForm.vue'
 import { formatDate } from '@/util/helper.js'
 import { formatTime } from '@/util/helper.js'
 import { formatDayOfWeek } from '@/util/helper.js'
+import Tag from 'primevue/tag'
 
 defineProps({
   schedules: []

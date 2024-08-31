@@ -1,12 +1,28 @@
 <template>
-  <div class="pagination">
-    <button :disabled="currentPage === 0" @click="goToPage(currentPage - 1)">Previous</button>
+  <div class="w-full p-5 mt-5 flex items-center justify-between max-w-6xl">
+    <div class="hidden lg:block">
+      <small
+        >Showing <span class="font-bold">{{ currentPage + 1 }}</span> out of
+        <span class="font-bold">{{ totalPages }}</span> pages</small
+      >
+    </div>
+    <div class="flex items-center justify-between lg:justify-start w-full lg:w-fit gap-3">
+      <button
+        :disabled="currentPage === 0"
+        :class="`${currentPage === 0 ? 'bg-primary_color/40' : 'bg-primary_color/80'} rounded-md px-4 py-2 text-white`"
+        @click="goToPage(currentPage - 1)"
+      >
+        <i class="pi pi-chevron-left" style="font-size: 0.7rem"></i> Prev
+      </button>
 
-    <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
-
-    <button :disabled="currentPage >= totalPages - 1" @click="goToPage(currentPage + 1)">
-      Next
-    </button>
+      <button
+        :disabled="currentPage >= totalPages - 1"
+        :class="`${currentPage >= totalPages - 1 ? 'bg-primary_color/40 ' : 'bg-primary_color/80'} rounded-md px-4 py-2 text-white`"
+        @click="goToPage(currentPage + 1)"
+      >
+        Next <i class="pi pi-chevron-right" style="font-size: 0.7rem"></i>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -44,15 +60,4 @@ const goToPage = (page) => {
 }
 </script>
 
-<style scoped>
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-</style>
+<style scoped></style>
