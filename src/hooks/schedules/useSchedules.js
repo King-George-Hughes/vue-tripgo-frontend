@@ -16,6 +16,7 @@ const useSchedules = () => {
 
   return useQuery({
     queryKey: ['schedules', query],
+
     queryFn: async () => {
       return await axiosClient
         .get('/bus/schedules', {

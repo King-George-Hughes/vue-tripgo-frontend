@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import TripsTable from '@/components/TripsTable.vue'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import useSearchSchedule from '@/hooks/schedules/useSearchSchedule'
+// import BookingForm from '@/features/booking/BookingForm.vue'
 
 const route = useRoute()
 
@@ -14,7 +15,7 @@ const query = reactive({
 })
 
 const data = reactive({
-  trips: []
+  schedules: []
 })
 
 const { mutate: searchSchedule, isPending } = useSearchSchedule()
@@ -22,7 +23,7 @@ const { mutate: searchSchedule, isPending } = useSearchSchedule()
 searchSchedule(query, {
   onSuccess: (response) => {
     console.log(response)
-    data.trips.splice(0, data.trips.length, ...response)
+    data.schedules.splice(0, data.schedules.length, ...response)
   }
 })
 </script>
@@ -34,7 +35,10 @@ searchSchedule(query, {
     </div>
 
     <div v-else>
-      <TripsTable :trips="data.trips" />
+      <!-- Testing Booking form -->
+      <!-- <BookingForm /> -->
+
+      <TripsTable :schedules="data.schedules" />
     </div>
   </div>
 </template>
