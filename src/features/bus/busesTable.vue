@@ -151,7 +151,9 @@ import BusForm from '@/features/bus/BusForm.vue'
 import { formatDateTime } from '@/util/helper'
 
 defineProps({
-  buses: []
+  buses: {
+    type: Array
+  }
 })
 </script>
 

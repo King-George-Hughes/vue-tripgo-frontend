@@ -172,7 +172,9 @@ import { formatDayOfWeek } from '@/util/helper.js'
 import Tag from 'primevue/tag'
 
 defineProps({
-  schedules: []
+  schedules: {
+    type: Array
+  }
 })
 </script>
 

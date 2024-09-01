@@ -138,7 +138,9 @@ import LocationForm from '@/features/location/LocationForm.vue'
 import { formatDateTime } from '@/util/helper'
 
 defineProps({
-  locations: []
+  locations: {
+    type: Array
+  }
 })
 </script>
 

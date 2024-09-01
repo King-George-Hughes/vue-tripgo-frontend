@@ -138,7 +138,9 @@ import DriverForm from '@/features/driver/DriverForm.vue'
 import { formatDateTime } from '@/util/helper'
 
 defineProps({
-  drivers: []
+  drivers: {
+    type: Array
+  }
 })
 </script>
 

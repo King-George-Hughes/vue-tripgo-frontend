@@ -63,6 +63,7 @@ const onSubmit = () => {
         router.push('/')
 
         visible.value = false
+        isSignUp.value = false
 
         credentials.firstName = ''
         credentials.lastName = ''
@@ -82,7 +83,8 @@ const onSubmit = () => {
         router.push('/')
 
         visible.value = false
-        isSigningUp.value = false
+        isSignUp.value = false
+        // isSigningUp.value = false
 
         credentials.email = ''
         credentials.password = ''

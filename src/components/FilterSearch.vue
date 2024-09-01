@@ -88,13 +88,12 @@ const onSubmit = () => {
 
     <!-- Search Button -->
     <button
-      :disabled="isPending"
       type="submit"
       @click="onSubmit"
       class="inline-flex justify-center items-center gap-x-3 text-center bg-gradient-to-tl from-primary_color to-secondary_color hover:from-primary_color hover:to-tertiary_color border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-1 py-3 px-4"
       href="#"
     >
-      {{ isPending ? 'Loading...' : 'Search' }}
+      Search
       <svg
         class="flex-shrink-0 size-4"
         xmlns="http://www.w3.org/2000/svg"
