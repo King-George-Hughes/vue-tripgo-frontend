@@ -11,16 +11,16 @@ import useLogout from '@/hooks/users/useLogout'
 import { useUserStore } from '@/stores/user'
 import { useToast } from 'vue-toastification'
 
-const links = [
-  {
-    name: 'Home',
-    url: '/'
-  }
-  // {
-  //   name: 'Terms and Conditions',
-  //   url: '/terms-and-conditions'
-  // }
-]
+// const links = [
+//   {
+//     name: 'Home',
+//     url: '/'
+//   },
+//   {
+//     name: 'Terms and Conditions',
+//     url: '/terms-and-conditions'
+//   }
+// ]
 
 const authLinks = [
   {
@@ -130,7 +130,8 @@ const onSubmit = () => {
           @click="toggle"
           class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-md border border-transparent bg-primary_color text-gray-50 hover:bg-secondary_color transition disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-secondary_color"
         >
-          <i class="pi pi-user" style="font-size: 0.8rem"></i> {{ userStore.user.email }}
+          <i class="pi pi-user" style="font-size: 0.8rem"></i> {{ userStore.user.firstName }}
+          {{ userStore.user.lastName }}
         </button>
 
         <button
@@ -141,7 +142,7 @@ const onSubmit = () => {
           Sign in
         </button>
 
-        <div class="md:hidden">
+        <!-- <div class="md:hidden">
           <button
             type="button"
             class="hs-collapse-toggle size-[38px] flex justify-center items-center text-sm font-semibold rounded-md border border-gray-200 text-black hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-neutral-700 dark:hover:bg-neutral-700"
@@ -181,7 +182,7 @@ const onSubmit = () => {
               <path d="m6 6 12 12" />
             </svg>
           </button>
-        </div>
+        </div> -->
       </div>
       <!-- End Button Group -->
 
@@ -193,7 +194,7 @@ const onSubmit = () => {
         <div
           class="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-7 md:mt-0"
         >
-          <div v-for="(link, index) in links" :key="index">
+          <!-- <div v-for="(link, index) in links" :key="index">
             <RouterLink
               :class="`${
                 isActiveLink(link.url) ? 'before:bg-secondary_color' : ''
@@ -202,7 +203,7 @@ const onSubmit = () => {
               aria-current="page"
               >{{ link.name }}</RouterLink
             >
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- End Collapse -->
@@ -324,11 +325,9 @@ const onSubmit = () => {
   <!-- User Popover -->
   <Popover ref="op">
     <div class="flex flex-col gap-4 w-[10rem]">
-      <div>
-        <span class="font-medium block"
-          >{{ userStore.user.firstName }} {{ userStore.user.lastName }}</span
-        >
-        <small class="block mb-2">{{ userStore.user.email }} </small>
+      <div class="border-b-2">
+        <span class="block text-sm text-gray-500"> Signed in as</span>
+        <span class="block mb-2 font-semibold">{{ userStore.user.email }} </span>
       </div>
       <div v-for="(link, index) in authLinks" :key="index">
         <RouterLink
