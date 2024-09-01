@@ -11,25 +11,14 @@ import useLogout from '@/hooks/users/useLogout'
 import { useUserStore } from '@/stores/user'
 import { useToast } from 'vue-toastification'
 
-// const links = [
-//   {
-//     name: 'Home',
-//     url: '/'
-//   },
-//   {
-//     name: 'Terms and Conditions',
-//     url: '/terms-and-conditions'
-//   }
-// ]
-
 const authLinks = [
   {
     name: 'My Bookings',
-    url: '/bookings'
+    url: '/my-bookings'
   },
   {
     name: 'My Account',
-    url: '/account'
+    url: '/my-account'
   }
 ]
 
@@ -52,6 +41,10 @@ const isActiveLink = (routePath) => {
 
 const toggle = (event) => {
   op.value.toggle(event)
+}
+
+const onSelectLink = () => {
+  op.value.hide()
 }
 
 const credentials = reactive({
@@ -141,48 +134,6 @@ const onSubmit = () => {
         >
           Sign in
         </button>
-
-        <!-- <div class="md:hidden">
-          <button
-            type="button"
-            class="hs-collapse-toggle size-[38px] flex justify-center items-center text-sm font-semibold rounded-md border border-gray-200 text-black hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-neutral-700 dark:hover:bg-neutral-700"
-            data-hs-collapse="#navbar-collapse-with-animation"
-            aria-controls="navbar-collapse-with-animation"
-            aria-label="Toggle navigation"
-          >
-            <svg
-              class="hs-collapse-open:hidden flex-shrink-0 size-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="3" x2="21" y1="6" y2="6" />
-              <line x1="3" x2="21" y1="12" y2="12" />
-              <line x1="3" x2="21" y1="18" y2="18" />
-            </svg>
-            <svg
-              class="hs-collapse-open:block hidden flex-shrink-0 size-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
-          </button>
-        </div> -->
       </div>
       <!-- End Button Group -->
 
@@ -190,25 +141,8 @@ const onSubmit = () => {
       <div
         id="navbar-collapse-with-animation"
         class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block md:w-auto md:basis-auto md:order-2 md:col-span-6"
-      >
-        <div
-          class="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-7 md:mt-0"
-        >
-          <!-- <div v-for="(link, index) in links" :key="index">
-            <RouterLink
-              :class="`${
-                isActiveLink(link.url) ? 'before:bg-secondary_color' : ''
-              } relative inline-block text-black before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1  dark:text-white`"
-              :to="link.url"
-              aria-current="page"
-              >{{ link.name }}</RouterLink
-            >
-          </div> -->
-        </div>
-      </div>
+      ></div>
       <!-- End Collapse -->
-
-      <!-- Login Dialog -->
     </nav>
   </header>
 
@@ -234,7 +168,8 @@ const onSubmit = () => {
               v-model="credentials.firstName"
               id="firstName"
               name="firstName"
-              class="!bg-white/20 !border-0 !p-3 !text-primary-50 w-80"
+              class="!border-0 !p-3 !text-primary-50 w-80"
+              placeholder="John"
             ></InputText>
           </div>
 
@@ -244,17 +179,19 @@ const onSubmit = () => {
               v-model="credentials.lastName"
               id="lastName"
               name="lastName"
-              class="!bg-white/20 !border-0 !p-3 !text-primary-50 w-80"
+              class="!border-0 !p-3 !text-primary-50 w-80"
+              placeholder="Doe"
             ></InputText>
           </div>
 
           <div class="inline-flex flex-col gap-2">
-            <label for="email" class="text-neutral-300 font-semibold">Email</label>
+            <label for="email" class="text-primary-50 font-semibold">Email</label>
             <InputText
               v-model="credentials.email"
               id="email"
               name="email"
               class="!border-0 !p-3 !text-primary-50 w-80"
+              placeholder="doe@example.com"
             ></InputText>
           </div>
 
@@ -264,8 +201,9 @@ const onSubmit = () => {
               v-model="credentials.password"
               id="password"
               name="password"
-              class="!bg-white/20 !border-0 !p-3 !text-primary-50 w-80"
+              class="!border-0 !p-3 !text-primary-50 w-80"
               type="password"
+              placeholder="********"
             ></InputText>
           </div>
 
@@ -277,8 +215,9 @@ const onSubmit = () => {
               v-model="credentials.confirmPassword"
               id="confirmPassword"
               name="confirmPassword"
-              class="!bg-white/20 !border-0 !p-3 !text-primary-50 w-80"
+              class="!border-0 !p-3 !text-primary-50 w-80"
               type="password"
+              placeholder="********"
             ></InputText>
           </div>
 
@@ -296,7 +235,7 @@ const onSubmit = () => {
             ></Button>
             <Button
               type="submit"
-              :label="isLoggingIn || isSigningUp ? 'Loading...' : 'Sign-In'"
+              :label="isLoggingIn || isSigningUp ? 'Loading...' : isSignUp ? 'Sign-Up' : 'Sign-In'"
               text
               class="!p-3 w-full !text-white !border !border-white/30 hover:!bg-white/10"
             ></Button>
@@ -305,7 +244,7 @@ const onSubmit = () => {
           <div v-if="isSignUp === false">
             <p class="text-center">
               Don't have an account?
-              <span class="font-semibold cursor-pointer" @click="isSignUp = true"
+              <span class="font-semibold cursor-pointer text-gray-50" @click="isSignUp = true"
                 >Register here</span
               >
             </p>
@@ -314,7 +253,9 @@ const onSubmit = () => {
           <div v-if="isSignUp === true">
             <p class="text-center">
               Already have an account?
-              <span class="font-semibold cursor-pointer" @click="isSignUp = false">Login here</span>
+              <span class="font-semibold cursor-pointer text-gray-50" @click="isSignUp = false"
+                >Login here</span
+              >
             </p>
           </div>
         </form>
@@ -336,11 +277,17 @@ const onSubmit = () => {
           } relative inline-block text-black before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1  dark:text-white`"
           :to="link.url"
           aria-current="page"
+          @click="onSelectLink"
           >{{ link.name }}</RouterLink
         >
       </div>
       <Button
-        @click="logout()"
+        @click="
+          () => {
+            logout()
+            onSelectLink()
+          }
+        "
         :label="isLoggingOut ? 'Loading...' : 'Logout'"
         icon="pi pi-sign-out"
         severity="danger"
