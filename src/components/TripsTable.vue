@@ -177,7 +177,7 @@ defineProps({
                   </td>
 
                   <!-- Mobile View -->
-                  <td class="lg:hidden h-px w-auto whitespace-nowrap">
+                  <td class="lg:hidden py-2 h-px w-auto whitespace-nowrap">
                     <div class="px-6 py-3 flex items-start gap-2 flex-col">
                       <div class="w-full flex justify-between">
                         <div class="flex items-start flex-col gap-2" href="#">
