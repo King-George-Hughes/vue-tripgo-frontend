@@ -6,6 +6,10 @@ import Button from 'primevue/button'
 import useCreateBooking from '@/hooks/bookings/useCreateBooking.js'
 import { useToast } from 'vue-toastification'
 import { useUserStore } from '@/stores/user'
+import { formatDate } from '@/util/helper.js'
+import { formatTime } from '@/util/helper.js'
+import { formatDayOfWeek } from '@/util/helper.js'
+import Tag from 'primevue/tag'
 
 const props = defineProps({
   schedule: {
@@ -146,9 +150,7 @@ const onSubmit = () => {
           </div>
         </form> -->
 
-        <div
-          class="relative flex flex-col bg-white shadow-lg rounded-xl pointer-events-auto dark:bg-neutral-800"
-        >
+        <div class="relative flex flex-col bg-white">
           <div
             class="relative overflow-hidden min-h-32 bg-primary_color/90 text-center rounded-t-xl"
           >
@@ -200,24 +202,28 @@ const onSubmit = () => {
             </div>
 
             <!-- Grid -->
-            <div class="mt-5 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-5">
+            <div class="mt-5 sm:mt-10 grid grid-cols-1 gap-3">
               <div>
                 <span class="block text-xs uppercase text-gray-500 dark:text-neutral-500"
-                  >Amount paid:</span
+                  >Schedule:</span
                 >
-                <span class="block text-sm font-medium text-gray-800 dark:text-neutral-200"
-                  >$316.8</span
-                >
-              </div>
-              <!-- End Col -->
+                <div class="py-2 flex flex-col items-start gap-2">
+                  <div class="text-sm text-gray-800 dark:text-neutral-200">
+                    {{ formatDayOfWeek(props.schedule.departureTime) }} -
+                    <span class="font-semibold">{{
+                      formatDate(props.schedule.departureTime)
+                    }}</span>
+                  </div>
 
-              <div>
-                <span class="block text-xs uppercase text-gray-500 dark:text-neutral-500"
-                  >Date paid:</span
-                >
-                <span class="block text-sm font-medium text-gray-800 dark:text-neutral-200"
-                  >April 22, 2020</span
-                >
+                  <div class="text-sm py-1">
+                    <Tag
+                      severity="secondary"
+                      :value="formatTime(props.schedule.departureTime)"
+                    ></Tag>
+                    -
+                    <Tag severity="secondary" :value="formatTime(props.schedule.arrivalTime)"></Tag>
+                  </div>
+                </div>
               </div>
               <!-- End Col -->
 
@@ -260,7 +266,7 @@ const onSubmit = () => {
             </div>
             <!-- End Grid -->
 
-            <div class="mt-5 sm:mt-10">
+            <div class="mt-5 sm:mt-8">
               <h4 class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">
                 Summary
               </h4>
@@ -310,23 +316,6 @@ const onSubmit = () => {
               ></Button>
             </form>
             <!-- End Buttons -->
-
-            <div class="mt-5 sm:mt-10">
-              <p class="text-sm text-gray-500 dark:text-neutral-500">
-                If you have any questions, please contact us at
-                <a
-                  class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
-                  href="#"
-                  >example@site.com</a
-                >
-                or call at
-                <a
-                  class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
-                  href="tel:+1898345492"
-                  >+1 898-34-5492</a
-                >
-              </p>
-            </div>
           </div>
           <!-- End Body -->
         </div>

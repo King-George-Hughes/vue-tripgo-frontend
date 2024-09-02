@@ -2,8 +2,10 @@
 import { formatDate } from '@/util/helper.js'
 import { formatTime } from '@/util/helper.js'
 import { formatDayOfWeek } from '@/util/helper.js'
-import Tag from 'primevue/tag'
+// import Tag from 'primevue/tag'
 import BookingForm from '@/features/booking/BookingForm.vue'
+
+import { Tag } from '@/hooks/usePrimevueComponents'
 
 defineProps({
   schedules: []
