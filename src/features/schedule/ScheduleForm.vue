@@ -7,7 +7,7 @@ import DatePicker from 'primevue/datepicker'
 import Select from 'primevue/select'
 import useCreateSchedule from '@/hooks/schedules/useCreateSchedule'
 import useLocations from '@/hooks/locations/useLocations'
-import useBuses from '@/hooks/buses/usebuses'
+import useBuses from '@/hooks/buses/useBuses'
 import { useToast } from 'vue-toastification'
 import { getRecurrenceInterval } from '@/util/helper'
 
