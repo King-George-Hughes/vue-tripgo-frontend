@@ -25,9 +25,9 @@ const form = reactive({
   scheduleType: '',
   departureTime: '',
   arrivalTime: '',
-  route: [''],
   recurrenceInterval: '',
-  price: ''
+  price: '',
+  route: ''
 })
 
 // Computed property for recurrence interval
@@ -53,19 +53,17 @@ const onSubmit = () => {
 
   if (!form.recurrenceInterval) {
     toast.error('Recurrence interval could not be calculated.')
-    return
+    return null
   }
 
-  if (form.route !== ['']) {
+  if (!form.route.trim()) {
+    form.route = []
+  } else {
     form.route = form.route.split(',').map((route) => route.trim())
   }
 
   // Convert price to a number
   form.price = Number(form.price)
-
-  // Convert the dates to ISO format
-  // form.departureTime = new Date(form.departureTime).toISOString()
-  // form.arrivalTime = new Date(form.arrivalTime).toISOString()
 
   console.log(form)
 
