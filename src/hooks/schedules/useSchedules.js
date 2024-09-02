@@ -11,7 +11,8 @@ const useSchedules = () => {
   const query = reactive({
     page: computed(() => parseInt(route.query.page) || 0),
     sort: computed(() => route.query.sort || 'dateCreated,desc'),
-    size: computed(() => parseInt(route.query.size) || 10)
+    size: computed(() => parseInt(route.query.size) || 10),
+    param: computed(() => route.query.search || '')
   })
 
   return useQuery({
@@ -26,7 +27,8 @@ const useSchedules = () => {
           params: {
             page: query.page,
             sort: query.sort,
-            size: query.size
+            size: query.size,
+            param: query.param
           }
         })
         .then(({ data }) => {

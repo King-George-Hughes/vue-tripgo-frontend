@@ -16,7 +16,8 @@
                 </h2>
               </div>
 
-              <div>
+              <div class="inline-flex items-center gap-5">
+                <SearchButton urlRoute="drivers" />
                 <DriverForm />
               </div>
             </div>
@@ -135,6 +136,7 @@
 
 <script setup>
 import DriverForm from '@/features/driver/DriverForm.vue'
+import SearchButton from '@/components/SearchButton.vue'
 import { formatDateTime } from '@/util/helper'
 
 defineProps({

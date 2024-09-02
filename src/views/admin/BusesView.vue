@@ -2,6 +2,7 @@
 import useBuses from '@/hooks/buses/useBuses'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import BusesTable from '@/features/bus/BusesTable.vue'
+import PaginationComponent from '@/components/PaginationComponent.vue'
 
 const { data: buses, isLoading } = useBuses()
 </script>
@@ -13,7 +14,9 @@ const { data: buses, isLoading } = useBuses()
     </div>
 
     <div v-else>
-      <BusesTable :buses="buses" />
+      <BusesTable :buses="buses.data" />
+
+      <PaginationComponent urlRoute="buses" :totalPages="buses.totalPages || 1" />
     </div>
   </div>
 </template>

@@ -3,6 +3,7 @@ import DriversTable from '@/features/driver/DriversTable.vue'
 
 import useDrivers from '@/hooks/drivers/useDrivers'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import PaginationComponent from '@/components/PaginationComponent.vue'
 
 const { data: drivers, isLoading } = useDrivers()
 </script>
@@ -14,7 +15,9 @@ const { data: drivers, isLoading } = useDrivers()
     </div>
 
     <div v-else>
-      <DriversTable :drivers="drivers" />
+      <DriversTable :drivers="drivers.data" />
+
+      <PaginationComponent urlRoute="drivers" :totalPages="drivers.totalPages || 1" />
     </div>
   </div>
 </template>

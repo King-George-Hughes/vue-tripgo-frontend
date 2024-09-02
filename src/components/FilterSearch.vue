@@ -56,7 +56,7 @@ const onSubmit = () => {
       </template>
       <template #option="slotProps">
         <div class="flex items-center">
-          <div>{{ slotProps.option.name }}</div>
+          <div>{{ slotProps.option.name }} - {{ slotProps.option.station }}</div>
         </div>
       </template>
     </Select>
@@ -80,7 +80,7 @@ const onSubmit = () => {
       </template>
       <template #option="slotProps">
         <div class="flex items-center">
-          <div>{{ slotProps.option.name }}</div>
+          <div>{{ slotProps.option.name }} - {{ slotProps.option.station }}</div>
         </div>
       </template>
     </Select>

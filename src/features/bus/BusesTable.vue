@@ -16,7 +16,8 @@
                 </h2>
               </div>
 
-              <div>
+              <div class="inline-flex items-center gap-5">
+                <SearchButton urlRoute="buses" />
                 <busForm />
               </div>
             </div>
@@ -149,6 +150,7 @@
 <script setup>
 import BusForm from '@/features/bus/BusForm.vue'
 import { formatDateTime } from '@/util/helper'
+import SearchButton from '@/components/SearchButton.vue'
 
 defineProps({
   buses: {

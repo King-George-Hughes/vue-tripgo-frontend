@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <div class="-m-1.5 overflow-x-auto">
-      <div class="p-1.5 w-full inline-block align-middle max-w-6xl">
+      <div class="p-1.5 w-full inline-block align-middle max-w-7xl">
         <div class="bg-white shadow-sm overflow-hidden">
           <!-- Header -->
           <div
@@ -68,7 +68,7 @@
                   <span
                     class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200"
                   >
-                    Actions
+                    Created At
                   </span>
                 </th>
 
@@ -151,14 +151,12 @@
                     >
                   </div>
                 </td>
+
                 <td class="hidden lg:table-cell h-px w-auto whitespace-nowrap">
-                  <div class="px-6 py-2 inline-flex items-center gap-3">
-                    <button class="text-yellow-500 hover:text-yellow-600">
-                      <i class="pi pi-pen-to-square"></i>
-                    </button>
-                    <button v-if="isAdmin" class="text-red-500 hover:text-red-600">
-                      <i class="pi pi-trash"></i>
-                    </button>
+                  <div class="px-6 py-2">
+                    <span class="text-sm text-gray-800 dark:text-neutral-200">{{
+                      formatDateTime(booking.bookingDate)
+                    }}</span>
                   </div>
                 </td>
 
@@ -247,6 +245,7 @@
 import { formatDate } from '@/util/helper.js'
 import { formatTime } from '@/util/helper.js'
 import { formatDayOfWeek } from '@/util/helper.js'
+import { formatDateTime } from '@/util/helper'
 import Tag from 'primevue/tag'
 
 defineProps({

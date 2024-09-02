@@ -10,7 +10,7 @@ const useBookings = () => {
 
   const query = reactive({
     page: computed(() => parseInt(route.query.page) || 0),
-    sort: computed(() => route.query.sort || 'bookingDate'),
+    sort: computed(() => route.query.sort || 'bookingDate,desc'),
     size: computed(() => parseInt(route.query.size) || 10)
   })
 

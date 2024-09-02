@@ -16,7 +16,8 @@
                 </h2>
               </div>
 
-              <div>
+              <div class="inline-flex items-center gap-5">
+                <SearchButton urlRoute="schedules" />
                 <ScheduleForm />
               </div>
             </div>
@@ -170,6 +171,7 @@ import { formatDate } from '@/util/helper.js'
 import { formatTime } from '@/util/helper.js'
 import { formatDayOfWeek } from '@/util/helper.js'
 import Tag from 'primevue/tag'
+import SearchButton from '@/components/SearchButton.vue'
 
 defineProps({
   schedules: {

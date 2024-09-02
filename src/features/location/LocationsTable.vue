@@ -16,7 +16,8 @@
                 </h2>
               </div>
 
-              <div>
+              <div class="inline-flex items-center gap-5">
+                <SearchButton urlRoute="locations" />
                 <LocationForm />
               </div>
             </div>
@@ -136,6 +137,7 @@
 <script setup>
 import LocationForm from '@/features/location/LocationForm.vue'
 import { formatDateTime } from '@/util/helper'
+import SearchButton from '@/components/SearchButton.vue'
 
 defineProps({
   locations: {

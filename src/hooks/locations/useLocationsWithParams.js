@@ -11,7 +11,8 @@ const useLocationsWithParams = () => {
   const query = reactive({
     page: computed(() => parseInt(route.query.page) || 0),
     sort: computed(() => route.query.sort || 'dateCreated,desc'),
-    size: computed(() => parseInt(route.query.size) || 10)
+    size: computed(() => parseInt(route.query.size) || 10),
+    param: computed(() => route.query.search || '')
   })
 
   return useQuery({
@@ -24,6 +25,7 @@ const useLocationsWithParams = () => {
             Authorization: `Bearer ${token}`
           },
           params: {
+            param: query.param,
             page: query.page,
             sort: query.sort,
             size: query.size

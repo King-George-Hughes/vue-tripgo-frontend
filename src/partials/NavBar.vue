@@ -58,6 +58,18 @@ const credentials = reactive({
 const onSubmit = () => {
   console.log(credentials)
   if (isSignUp.value === true) {
+    if (
+      credentials.firstName === '' ||
+      credentials.lastName === '' ||
+      credentials.email === '' ||
+      credentials.password === '' ||
+      credentials.confirmPassword === ''
+    ) {
+      toast.error('All fields are required!!')
+
+      return null
+    }
+
     signup(credentials, {
       onSuccess: () => {
         router.push('/')
@@ -78,6 +90,12 @@ const onSubmit = () => {
       }
     })
   } else {
+    if (credentials.email === '' || credentials.password === '') {
+      toast.error('All fields are required!!')
+
+      return null
+    }
+
     login(credentials, {
       onSuccess: () => {
         router.push('/')
