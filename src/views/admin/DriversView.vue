@@ -1,5 +1,5 @@
 <script setup>
-import DriversTable from '@/features/driver/driversTable.vue'
+import DriversTable from '@/features/driver/DriversTable.vue'
 
 import useDrivers from '@/hooks/drivers/useDrivers'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
