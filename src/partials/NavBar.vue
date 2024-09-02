@@ -113,7 +113,7 @@ const onSubmit = () => {
           to="/"
           aria-label="Preline"
         >
-          LOGO
+          TRIPGO
         </RouterLink>
         <!-- End Logo -->
       </div>

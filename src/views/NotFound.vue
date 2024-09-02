@@ -7,7 +7,7 @@
           class="flex-none text-xl font-semibold sm:text-3xl dark:text-white"
           to="/"
           aria-label="Brand"
-          >LOGO</RouterLink
+          >TRIPGO</RouterLink
         >
       </nav>
     </header>

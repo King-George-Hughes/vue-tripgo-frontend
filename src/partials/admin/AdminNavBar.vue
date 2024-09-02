@@ -19,7 +19,7 @@ const { mutate: logout, isPending: isLoggingOut } = useLogout()
           to="/dashboard"
           aria-label="Preline"
         >
-          LOGO
+          TRIPGO
         </RouterLink>
         <!-- End Logo -->
       </div>

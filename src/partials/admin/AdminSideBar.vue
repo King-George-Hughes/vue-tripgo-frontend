@@ -68,7 +68,7 @@ const toggleBreadcrumb = (index) => {
           to="/dashboard"
           aria-label="Preline"
         >
-          LOGO
+          TRIPGO
         </RouterLink>
         <!-- End Logo -->
       </div>
@@ -138,7 +138,7 @@ const toggleBreadcrumb = (index) => {
         <!-- Breadcrumb -->
         <ol class="ms-3 flex items-center whitespace-nowrap">
           <li class="flex items-center text-sm text-gray-800 dark:text-neutral-400">
-            LOGO
+            TRIPGO
             <svg
               class="shrink-0 mx-3 overflow-visible size-2.5 text-gray-400 dark:text-neutral-500"
               width="16"
