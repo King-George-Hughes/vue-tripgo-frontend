@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive } from 'vue'
 import Dialog from 'primevue/dialog'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
@@ -9,7 +9,6 @@ import useCreateSchedule from '@/hooks/schedules/useCreateSchedule'
 import useLocations from '@/hooks/locations/useLocations'
 import useBuses from '@/hooks/buses/useBuses'
 import { useToast } from 'vue-toastification'
-import { getRecurrenceInterval } from '@/util/helper'
 
 const toast = useToast()
 const showScheduleForm = ref(false)
@@ -30,10 +29,6 @@ const form = reactive({
   route: ''
 })
 
-const recurrenceInterval = computed(() => {
-  return getRecurrenceInterval(form.departureTime, form.arrivalTime)
-})
-
 const isSubmitting = ref(false)
 
 const onSubmit = () => {
@@ -52,14 +47,6 @@ const onSubmit = () => {
     form.destinationId === ''
   ) {
     toast.error('All fields are required!')
-    isSubmitting.value = false
-    return
-  }
-
-  form.recurrenceInterval = recurrenceInterval.value
-
-  if (!form.recurrenceInterval) {
-    toast.error('Recurrence interval could not be calculated.')
     isSubmitting.value = false
     return
   }
@@ -110,9 +97,9 @@ const onSubmit = () => {
         :style="{ width: '45rem' }"
       >
         <form @submit.prevent="onSubmit">
-          <span class="text-surface-500 dark:text-surface-400 block mb-8"
-            >Fill the details below.</span
-          >
+          <span class="text-surface-500 dark:text-surface-400 block mb-8">
+            Fill the details below.
+          </span>
 
           <div class="flex items-center gap-4 mb-4">
             <div class="w-full flex flex-col">
@@ -158,7 +145,7 @@ const onSubmit = () => {
 
           <div class="flex items-center gap-4 mb-4">
             <div class="w-full flex flex-col">
-              <label for="busId" class="font-semibold pl-2 pb-2">Depature</label>
+              <label for="departureTime" class="font-semibold pl-2 pb-2">Departure</label>
               <DatePicker
                 v-model="form.departureTime"
                 dateFormat="dd/mm/yy"
@@ -172,7 +159,7 @@ const onSubmit = () => {
             </div>
 
             <div class="w-full flex flex-col">
-              <label for="busId" class="font-semibold pl-2 pb-2">Arrival</label>
+              <label for="arrivalTime" class="font-semibold pl-2 pb-2">Arrival</label>
               <DatePicker
                 v-model="form.arrivalTime"
                 dateFormat="dd/mm/yy"
@@ -232,28 +219,26 @@ const onSubmit = () => {
             </div>
 
             <div class="w-full flex flex-col">
-              <label for="recurrenceInterval" class="font-semibold pl-2 pb-2"
-                >Recurrence Interval</label
-              >
+              <label for="recurrenceInterval" class="font-semibold pl-2 pb-2">
+                Recurrence Interval
+              </label>
               <InputText
                 id="recurrenceInterval"
-                v-model="recurrenceInterval"
+                v-model="form.recurrenceInterval"
                 name="recurrenceInterval"
                 class="flex-auto"
                 autocomplete="off"
-                disabled
+                placeholder="e.g. PT30h"
               />
             </div>
           </div>
 
           <div class="flex items-center gap-4 mb-4">
             <div class="w-full flex flex-col">
-              <label for="route" class="font-semibold pl-2 pb-2"
-                >Routes
-                <span class="text-xs font-normal text-red-600"
-                  >(comma separated values)</span
-                ></label
-              >
+              <label for="route" class="font-semibold pl-2 pb-2">
+                Routes
+                <span class="text-xs font-normal text-red-600"> (comma separated values) </span>
+              </label>
               <InputText
                 id="route"
                 v-model="form.route"
@@ -272,12 +257,12 @@ const onSubmit = () => {
               label="Cancel"
               severity="secondary"
               @click="showScheduleForm = false"
-            ></Button>
+            />
             <Button
               :disabled="isCreatingSchedule || isSubmitting"
               type="submit"
               :label="isCreatingSchedule ? 'Loading...' : 'Save'"
-            ></Button>
+            />
           </div>
         </form>
       </Dialog>
