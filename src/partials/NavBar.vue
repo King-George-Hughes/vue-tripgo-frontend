@@ -56,7 +56,6 @@ const credentials = reactive({
 })
 
 const onSubmit = () => {
-  console.log(credentials)
   if (isSignUp.value === true) {
     if (
       credentials.firstName === '' ||

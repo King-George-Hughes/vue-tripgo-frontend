@@ -15,7 +15,6 @@ const useCreateSchedule = () => {
           }
         })
         .then(({ data }) => {
-          console.log(data)
           return data
         }),
 

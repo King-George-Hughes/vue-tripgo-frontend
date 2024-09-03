@@ -22,7 +22,6 @@ const { mutate: searchSchedule, isPending } = useSearchSchedule()
 
 searchSchedule(query, {
   onSuccess: (response) => {
-    console.log(response)
     data.schedules.splice(0, data.schedules.length, ...response)
   }
 })

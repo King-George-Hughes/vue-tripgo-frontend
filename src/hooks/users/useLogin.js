@@ -10,7 +10,6 @@ const useLogin = () => {
       await axiosClient
         .post('/auth/login', credentials)
         .then(({ data }) => {
-          console.log(data)
           return data
         })
         .catch((error) => {

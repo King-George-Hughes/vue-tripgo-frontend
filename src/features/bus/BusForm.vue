@@ -18,8 +18,6 @@ const form = reactive({
 })
 
 const onSubmit = () => {
-  console.log(form)
-
   if (form.plateNumber === '' || form.mode === '' || form.seatCapacity === '') {
     toast.error('All fields are required!')
 

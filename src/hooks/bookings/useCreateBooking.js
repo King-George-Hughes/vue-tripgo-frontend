@@ -9,7 +9,6 @@ const useCreateBooking = () => {
       await axiosClient
         .post('/bookings/travel', booking)
         .then(({ data }) => {
-          console.log(data)
           return data
         })
         .catch((error) => {
