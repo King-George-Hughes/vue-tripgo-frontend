@@ -228,7 +228,7 @@ const onSubmit = () => {
                 name="recurrenceInterval"
                 class="flex-auto"
                 autocomplete="off"
-                placeholder="e.g. PT30h"
+                placeholder="e.g. PT2h"
               />
             </div>
           </div>
