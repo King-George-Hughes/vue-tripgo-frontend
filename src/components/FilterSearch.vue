@@ -1,8 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-// import Select from 'primevue/select'
-// import DatePicker from 'primevue/datepicker'
 import { useToast } from 'vue-toastification'
 import useLocations from '@/hooks/locations/useLocations'
 

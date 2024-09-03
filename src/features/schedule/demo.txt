@@ -30,19 +30,12 @@ const form = reactive({
   route: ''
 })
 
+// Computed property for recurrence interval
 const recurrenceInterval = computed(() => {
   return getRecurrenceInterval(form.departureTime, form.arrivalTime)
 })
 
-const isSubmitting = ref(false)
-
 const onSubmit = () => {
-  if (isSubmitting.value) {
-    return
-  }
-
-  isSubmitting.value = true
-
   if (
     form.price === '' ||
     form.busId === '' ||
@@ -52,16 +45,15 @@ const onSubmit = () => {
     form.destinationId === ''
   ) {
     toast.error('All fields are required!')
-    isSubmitting.value = false
-    return
+
+    return null
   }
 
   form.recurrenceInterval = recurrenceInterval.value
 
   if (!form.recurrenceInterval) {
     toast.error('Recurrence interval could not be calculated.')
-    isSubmitting.value = false
-    return
+    return null
   }
 
   if (!form.route.trim()) {
@@ -70,7 +62,10 @@ const onSubmit = () => {
     form.route = form.route.split(',').map((route) => route.trim())
   }
 
+  // Convert price to a number
   form.price = Number(form.price)
+
+  console.log(form)
 
   createSchedule(form, {
     onSuccess: () => {
@@ -90,9 +85,6 @@ const onSubmit = () => {
     },
     onError: () => {
       toast.error('There was an error!')
-    },
-    onSettled: () => {
-      isSubmitting.value = false
     }
   })
 }
@@ -133,6 +125,15 @@ const onSubmit = () => {
                   </div>
                 </template>
               </Select>
+              <!-- <Select
+                v-model="form.originId"
+                :options="locations"
+                name="originId"
+                optionLabel="name"
+                optionValue="id"
+                placeholder="Select Origin"
+                class="flex-auto"
+              /> -->
             </div>
 
             <div class="w-full flex flex-col">
@@ -159,6 +160,7 @@ const onSubmit = () => {
           <div class="flex items-center gap-4 mb-4">
             <div class="w-full flex flex-col">
               <label for="busId" class="font-semibold pl-2 pb-2">Depature</label>
+              <!-- Date Picker -->
               <DatePicker
                 v-model="form.departureTime"
                 dateFormat="dd/mm/yy"
@@ -205,6 +207,16 @@ const onSubmit = () => {
                   </div>
                 </template>
               </Select>
+
+              <!-- <Select
+                v-model="form.busId"
+                :options="buses"
+                name="busId"
+                optionLabel="model"
+                optionValue="id"
+                placeholder="Select Bus"
+                class="flex-auto"
+              /> -->
             </div>
 
             <div class="w-full flex flex-col">
@@ -241,7 +253,6 @@ const onSubmit = () => {
                 name="recurrenceInterval"
                 class="flex-auto"
                 autocomplete="off"
-                disabled
               />
             </div>
           </div>
@@ -267,14 +278,14 @@ const onSubmit = () => {
 
           <div class="flex justify-end gap-2">
             <Button
-              :disabled="isCreatingSchedule || isSubmitting"
+              :disabled="isCreatingSchedule"
               type="button"
               label="Cancel"
               severity="secondary"
               @click="showScheduleForm = false"
             ></Button>
             <Button
-              :disabled="isCreatingSchedule || isSubmitting"
+              :disabled="isCreatingSchedule"
               type="submit"
               :label="isCreatingSchedule ? 'Loading...' : 'Save'"
             ></Button>
@@ -284,3 +295,5 @@ const onSubmit = () => {
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped></style>

@@ -1,10 +1,10 @@
 <script setup>
-import useBuses from '@/hooks/buses/useBuses'
+import useBusesWithPage from '@/hooks/buses/useBusesWithPage'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import BusesTable from '@/features/bus/BusesTable.vue'
 import PaginationComponent from '@/components/PaginationComponent.vue'
 
-const { data: buses, isLoading } = useBuses()
+const { data: buses, isLoading } = useBusesWithPage()
 </script>
 
 <template>
