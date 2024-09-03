@@ -2,7 +2,7 @@
 import { ref, reactive } from 'vue'
 import Dialog from 'primevue/dialog'
 import Button from 'primevue/button'
-// import InputText from 'primevue/inputtext'
+import InputText from 'primevue/inputtext'
 import useCreateBooking from '@/hooks/bookings/useCreateBooking.js'
 import { useToast } from 'vue-toastification'
 import { useUserStore } from '@/stores/user'
@@ -10,6 +10,8 @@ import { formatDate } from '@/util/helper.js'
 import { formatTime } from '@/util/helper.js'
 import { formatDayOfWeek } from '@/util/helper.js'
 import Tag from 'primevue/tag'
+import Popover from 'primevue/popover'
+import Select from 'primevue/select'
 
 const props = defineProps({
   schedule: {
@@ -17,11 +19,12 @@ const props = defineProps({
   }
 })
 
-console.log(props.schedule)
-
 const user = useUserStore().user
 const toast = useToast()
 const showBookingform = ref(false)
+
+const genders = ref([{ name: 'MALE' }, { name: 'FEMALE' }])
+const op = ref()
 
 const { mutate: createBooking, isPending: isCreatingBooking } = useCreateBooking()
 
@@ -30,11 +33,11 @@ const form = reactive({
   userId: user.id,
   passengers: [
     {
-      firstName: 'George',
-      lastName: 'Hughes',
+      firstName: user.firstName,
+      lastName: user.lastName,
       phoneNumber: '+23312345678',
-      email: 'king@gmail.com',
-      address: 'the address',
+      email: user.email,
+      address: 'BCD 123',
       gender: 'MALE'
     }
   ],
@@ -43,8 +46,31 @@ const form = reactive({
   paymentType: 'VISA'
 })
 
+const formPassenger = reactive({
+  firstName: '',
+  lastName: '',
+  phoneNumber: '',
+  email: '',
+  address: '',
+  gender: ''
+})
+
+const toggle = (event) => {
+  op.value.toggle(event)
+}
+
+const onSelectLink = () => {
+  form.passengers.push({ ...formPassenger })
+
+  // Reset formPassenger to prepare for the next entry
+  Object.keys(formPassenger).forEach((key) => (formPassenger[key] = ''))
+
+  // Hide the popover
+  op.value.hide()
+}
+
 const onSubmit = () => {
-  console.log(form)
+  // console.log(form)
 
   createBooking(form, {
     onSuccess: () => {
@@ -263,6 +289,70 @@ const onSubmit = () => {
                 </div>
               </div>
               <!-- End Col -->
+
+              <!-- Add Passenger -->
+              <button @click="toggle" class="bg-gray-600 rounded-md text-white py-2 mt-2">
+                <i class="pi pi-user" style="font-size: 0.8rem; margin-right: 5px"></i> Add
+                Passenger
+              </button>
+
+              <Popover ref="op">
+                <div class="flex flex-col gap-4 w-full">
+                  <div class="flex flex-col gap-2">
+                    <div class="flex items-center gap-2">
+                      <InputText
+                        v-model="formPassenger.firstName"
+                        name="firstName"
+                        placeholder="First Name"
+                      ></InputText>
+                      <InputText
+                        v-model="formPassenger.lastName"
+                        name="lastName"
+                        placeholder="Last Name"
+                      ></InputText>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                      <InputText
+                        v-model="formPassenger.email"
+                        name="email"
+                        placeholder="Email"
+                      ></InputText>
+                      <InputText
+                        v-model="formPassenger.phoneNumber"
+                        name="phoneNumber"
+                        placeholder="Phone Number"
+                      ></InputText>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                      <Select
+                        v-model="formPassenger.gender"
+                        :options="genders"
+                        name="gender"
+                        optionLabel="name"
+                        optionValue="name"
+                        placeholder="Select Gender"
+                        class="flex-auto"
+                      />
+                      <InputText
+                        v-model="formPassenger.address"
+                        name="address"
+                        placeholder="Address"
+                      ></InputText>
+                    </div>
+                  </div>
+
+                  <Button
+                    type="button"
+                    @click="onSelectLink"
+                    label="Add"
+                    icon="pi pi-plus"
+                    severity="success"
+                  />
+                </div>
+              </Popover>
+              <!-- Add passenger -->
             </div>
             <!-- End Grid -->
 

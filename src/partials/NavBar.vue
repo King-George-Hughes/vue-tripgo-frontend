@@ -15,11 +15,11 @@ const authLinks = [
   {
     name: 'My Bookings',
     url: '/my-bookings'
-  },
-  {
-    name: 'My Account',
-    url: '/my-account'
   }
+  // {
+  //   name: 'My Account',
+  //   url: '/my-account'
+  // }
 ]
 
 const userStore = useUserStore()
